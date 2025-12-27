@@ -46,7 +46,7 @@ models/
 # Data files (uncomment if you don't want to track large data files)
 # *.xlsx
 # *.csv
-# *.xls
+*.pdf
 
 # Temporary files
 *.tmp
