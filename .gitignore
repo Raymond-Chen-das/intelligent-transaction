@@ -1,0 +1,111 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv
+*.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# TensorFlow / Keras
+*.h5
+*.hdf5
+*.pb
+*.ckpt
+*.ckpt.*
+*.meta
+*.index
+logs/
+checkpoints/
+
+# Machine Learning Models
+models/
+*.pkl
+*.pickle
+*.joblib
+*.model
+
+# Data files (uncomment if you don't want to track large data files)
+# *.xlsx
+# *.csv
+# *.xls
+
+# Temporary files
+*.tmp
+*.bak
+*.log
+*.cache
+.claude
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Distribution / packaging
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.hypothesis/
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# pyenv
+.python-version
+
+# Output files (uncomment to exclude specific output files)
+# real.xlsx
+# OLS.xlsx
+# RF.xlsx
+# NN3.xlsx
+# NN4.xlsx
+# NN5.xlsx
+# XGBoost.xlsx
+# real_bm_only.xlsx
+# real_size_only.xlsx
+# real_mom_only.xlsx
+# 累積報酬比較.xlsx
