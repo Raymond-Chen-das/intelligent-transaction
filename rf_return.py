@@ -30,7 +30,7 @@ mom_ret = np.array(mom_ret.iloc[169:,:])
 
 """ 計算 Return """
 # 讀取或建立 Excel 檔案
-workbook = openpyxl.load_workbook("OLS.xlsx")  # 如果檔案不存在，請先建立
+workbook = openpyxl.load_workbook("RF.xlsx")  # 如果檔案不存在，請先建立
 sheet = workbook["預測IC"]  # 選擇工作表
 
 # 2013/12~2025/01
