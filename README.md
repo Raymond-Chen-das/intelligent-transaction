@@ -11,6 +11,7 @@
 - **真實 IC 基準**：使用真實 IC 值構建投資組合作為基準（real.xlsx）
 - **多因子預測**：使用機器學習模型預測 bm（帳面市值比）、size（公司規模）、mom（動量）三個因子的 IC 值
 - **動態因子選擇**：每期自動選擇 IC 絕對值最大的因子（真實或預測）
+- **加權因子策略**：使用 IC 加權組合所有因子，而非單一因子選擇
 - **投資組合構建**：基於因子排名建立多空投資組合（13 種分組方式）
 - **模型比較**：比較機器學習預測模型與真實 IC 基準的績效
 - **績效評估**：計算累積報酬並與大盤比較
@@ -35,6 +36,14 @@
 - **[nn_return.py](nn_return.py)**：根據神經網路預測 IC 構建投資組合並計算報酬
 - **[xgboost_return.py](xgboost_return.py)**：根據 XGBoost 預測 IC 構建投資組合並計算報酬
 
+#### 加權因子策略
+
+- **[weighted_portfolio.py](weighted_portfolio.py)**：使用 IC 加權組合所有因子的投資組合計算
+  - 不選擇單一因子，而是將三個因子以其 IC 值為權重進行加權組合
+  - 加權因子 = bm × IC_bm + size × IC_size + mom × IC_mom
+  - 一次處理所有模型（real、OLS、RF、NN3、NN4、NN5、XGBoost）
+  - 輸出加權版本檔案（*_weighted.xlsx）
+
 #### 分析工具
 - **[portfolio_analysis.py](portfolio_analysis.py)**：批次處理多個模型的投資組合分析（計算 13 種分組規模的報酬）
 - **[integrate_excel.py](integrate_excel.py)**：整合多個模型結果到單一 Excel 檔案（累積報酬比較）
@@ -47,7 +56,8 @@
 - **size.xlsx**：公司規模因子
 - **mom.xlsx**：動量因子
 
-#### 模型結果
+#### 模型結果（動態因子選擇）
+
 - **real.xlsx**：基於真實 IC 的投資組合結果（基準，2013/12 ~ 2025/07）
 - **OLS.xlsx**：線性迴歸模型結果（預測 IC：2013/12 ~ 2025/08）
 - **RF.xlsx**：隨機森林模型結果（預測 IC：2013/12 ~ 2025/08）
@@ -55,6 +65,16 @@
 - **NN4.xlsx**：神經網路模型結果（4 層隱藏層）
 - **NN5.xlsx**：神經網路模型結果（5 層隱藏層）
 - **XGBoost.xlsx**：XGBoost 模型結果（預測 IC：2013/12 ~ 2025/08）
+
+#### 模型結果（加權因子策略）
+
+- **real_weighted.xlsx**：基於真實 IC 加權的投資組合結果
+- **OLS_weighted.xlsx**：OLS 預測 IC 加權的投資組合結果
+- **RF_weighted.xlsx**：RF 預測 IC 加權的投資組合結果
+- **NN3_weighted.xlsx**：NN3 預測 IC 加權的投資組合結果
+- **NN4_weighted.xlsx**：NN4 預測 IC 加權的投資組合結果
+- **NN5_weighted.xlsx**：NN5 預測 IC 加權的投資組合結果
+- **XGBoost_weighted.xlsx**：XGBoost 預測 IC 加權的投資組合結果
 
 #### 分析結果
 - **累積報酬比較.xlsx**：整合所有模型的累積報酬比較
@@ -186,6 +206,8 @@ python xgboost_predict.py
 
 ### 3. 計算投資組合報酬
 
+#### 方法 A：動態因子選擇策略
+
 ```bash
 # 根據預測 IC 構建投資組合並計算報酬
 python ols_return.py
@@ -195,10 +217,27 @@ python xgboost_return.py
 ```
 
 **功能說明**：
+
 - 讀取模型預測的 IC 值（2013/12 ~ 2025/08，141 個月）
 - 每期選擇預測 IC 絕對值最大的因子
 - 根據因子排名構建多空投資組合（13 種分組規模）
 - 計算投資組合報酬（2014/01 ~ 2025/09）並寫回 Excel 檔案
+
+#### 方法 B：加權因子策略
+
+```bash
+# 使用 IC 加權組合所有因子
+python weighted_portfolio.py
+```
+
+**功能說明**：
+
+- 一次處理所有模型（real、OLS、RF、NN3、NN4、NN5、XGBoost）
+- 不選擇單一因子，而是將三個因子以其 IC 值為權重進行加權組合
+- 加權因子計算：fac = bm × IC_bm + size × IC_size + mom × IC_mom
+- 報酬率計算固定為：ans = high - low（不依據 IC 正負值調整）
+- 輸出加權版本檔案：real_weighted.xlsx、OLS_weighted.xlsx 等
+- 每個輸出檔案包含原始檔案的所有工作表內容
 
 ### 4. 績效分析與比較
 
