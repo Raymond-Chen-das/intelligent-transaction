@@ -289,14 +289,16 @@ python create_confusion_matrix.py
 
 ## 注意事項
 
-1. 本專案僅供學術研究和教學使用
+1. 本專案為學術與教學示範性質，非投資建議
 2. 過去績效不代表未來表現
 3. 實際投資需考慮交易成本、流動性等因素
 4. 建議在虛擬環境中運行以避免套件衝突
 
-## 授權聲明
+## 授權 License
 
-本專案為學術研究用途，請勿用於商業目的。
+本專案採用 [MIT License](LICENSE) 授權，歡迎自由使用、修改與分享。
+
+This project is licensed under the [MIT License](LICENSE).
 
 ## 聯絡資訊
 
